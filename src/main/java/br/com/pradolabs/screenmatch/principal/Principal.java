@@ -3,6 +3,7 @@ package br.com.pradolabs.screenmatch.principal;
 import br.com.pradolabs.screenmatch.model.DadosEpisodio;
 import br.com.pradolabs.screenmatch.model.DadosSerie;
 import br.com.pradolabs.screenmatch.model.DadosTemporada;
+import br.com.pradolabs.screenmatch.model.Episodio;
 import br.com.pradolabs.screenmatch.service.ConsumoAPI;
 import br.com.pradolabs.screenmatch.service.ConverteDados;
 
@@ -53,18 +54,18 @@ public class Principal {
 //        nomes.stream().sorted().limit(3).filter(n -> n.startsWith("N")).map(n -> n.toUpperCase())
 //                .forEach(System.out::println);
 
-//        List<DadosEpisodio> dadosEpisodios = temporadas.stream()
-//                .flatMap(t -> t.episodios().stream())
-//                .collect(Collectors.toList());
-//
-//        System.out.println("\nTop 5 episódios");
-//        dadosEpisodios.stream()
-//                .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
-//                .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
-//                .limit(5)
-//                .forEach(System.out::println);
+        List<DadosEpisodio> dadosEpisodios = temporadas.stream()
+                .flatMap(t -> t.episodios().stream())
+                .collect(Collectors.toList());
 
-        /*List<Episodio> episodios = temporadas.stream()
+        System.out.println("\nTop 5 episódios");
+        dadosEpisodios.stream()
+                .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
+                .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
+                .limit(5)
+                .forEach(System.out::println);
+
+        List<Episodio> episodios = temporadas.stream()
                 .flatMap(t -> t.episodios().stream()
                         .map(d -> new Episodio(t.numero(), d)))
                 .collect(Collectors.toList());
@@ -85,6 +86,6 @@ public class Principal {
                         "Temporada:  " + e.getTemporada() +
                                 " Episódio: " + e.getTitulo() +
                                 " Data lançamento: " + e.getDataLancamento().format(formatador)
-                ));*/
+                ));
     }
 }
